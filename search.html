@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title>搜索</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/common.css">
+
+</head>
+<style>
+	header .left{
+		line-height: 2.5rem;
+	}
+	.left>a{ 
+		width: 90% !important;
+		height: 71% !important;
+		background-color: #F2F2F2;
+		margin-top: 0.45rem;
+		margin-left: 0.5rem;
+	}
+	.middle>input{
+		padding: 0.4rem 0;
+		background-color: #F2F2F2;
+		width: 100%;
+	}
+	#word{
+		position: absolute;
+		z-index: 99;
+		width: 100%;
+		height: auto;
+		background-color: white;
+		/*border: black solid 1px;*/
+		display: none;
+		text-align: left;
+	}
+	.click_work{
+		height: 2rem;
+		font-size: 18px;
+		cursor:pointer;/*鼠标放上变成小手*/
+	}
+	.click_work:hover{
+		color: orange;
+		background-color: gray;
+	}
+	.error{
+		color: gray;
+		cursor:pointer;/*鼠标放上变成小手*/
+	}
+	.right>input{
+		width: 100%;
+		height: 100%;
+		background-color: #F2F2F2;
+	}
+	header .right{
+		padding: 0.42rem 0.42rem 0.42rem 0;
+		line-height: 0;
+	}
+</style>
+<body>
+	<header>
+		<div class="left">
+			<a href="drysaltery.html"><img src="images/ico_back@3x.png" height="16"alt=""></a>
+		</div>
+		<div class="middle">
+			<input id="text" type="text" placeholder="搜索课程、话题、饮食">
+			<div id="word"></div>
+		</div>
+		<div class="right"><input type="button" value="Go"></div>
+	</header>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function(){
+//褰撻敭鐩橀敭琚澗寮€鏃跺彂閫丄jax鑾峰彇鏁版嵁
+		$('#text').keyup(function(){
+			var keywords = $(this).val();
+			if (keywords=='') { $('#word').hide(); return };
+			$.ajax({
+				url: 'http://suggestion.baidu.com/su?wd=' + keywords,
+				dataType: 'jsonp',
+				jsonp: 'cb', //鍥炶皟鍑芥暟鐨勫弬鏁板悕(閿€�)key
+				// jsonpCallback: 'fun', //鍥炶皟鍑芥暟鍚�(鍊�) value
+				beforeSend:function(){
+					$('#word').append('<div>姝ｅ湪鍔犺浇銆傘€傘€�</div>');
+				},
+				success:function(data){
+					$('#word').empty().show();
+					if (data.s=='')
+					{
+						$('#word').append('<div class="error">Not find  "' + keywords + '"</div>');
+					}
+					$.each(data.s, function(){
+						$('#word').append('<div class="click_work">'+ this +'</div>');
+					})
+				},
+				error:function(){
+					$('#word').empty().show();
+					$('#word').append('<div class="click_work">Fail "' + keywords + '"</div>');
+				}
+			})
+		})
+//鐐瑰嚮鎼滅储鏁版嵁澶嶅埗缁欐悳绱㈡
+		$(document).on('click','.click_work',function(){
+			var word = $(this).text();
+			$('#text').val(word);
+			$('#word').hide();
+			// $('#texe').trigger('click');瑙﹀彂鎼滅储浜嬩欢
+		})
+
+	})
+	</script>
+</body>
+</html>

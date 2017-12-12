@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title>干货-课程</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/lesson.css">
+</head>
+<body>
+	<header>
+		<div class="left">
+			<a href="drysaltery.html"><img src="images/ico_back@3x.png" height="16"alt=""></a>
+		</div>
+		<div class="middle">Five</div>
+	</header>
+	<!--导航栏-->
+    <div class="nav">
+        <div class="navWrap">
+            <ul class="clearfix">
+                <li><a href='javascript:;'>不限类型</a></li>
+                <li><a href='javascript:;'>不限部位</a></li>
+                <li><a href='javascript:;'>不限器械</a></li>
+                <li><a href='javascript:;'>不限难度</a></li>
+            </ul>
+        </div>
+        <!--商铺-->
+        <div class="shop shoping hide">
+            <ul>
+                <!--<li class="clearfix"><a href='javascript:;'>京东<span class="fr hide">✔</span></a></li>-->
+            </ul>
+        </div>
+        <!--区域-->
+        <div class="shop area hide">
+            <ul>
+                <!--<li class="clearfix"><a href='javascript:;'>华北（北京、山西等）<span class="fr hide">✔</span></a></li>-->
+            </ul>
+        </div>
+        <!--全部价格-->
+        <div class="shop allPrice hide">
+            <ul>
+                <!-- <li class="clearfix"><a href='javascript:;'>全部价格<span class="fr">✔</span></a></li> -->
+            </ul>
+        </div>
+    </div>
+
+	<!-- 视频教程列表 -->
+	<ul class="list2 products">
+		<li>
+		  <div class="img"><img src="images/6.bmp" alt=""></div>
+			<p class="one">胸肌入门</p>
+			<p class="two">3分钟 初级</p>
+			<p class="three">66666 人已参加</p>
+		</li>
+		<li>
+			<p class="one">胸肌入门</p>
+			<p class="two">3分钟 初级</p>
+			<p class="three">66666 人已参加</p>
+		</li>
+		<li>
+
+			<p class="one">胸肌入门</p>
+			<p class="two">3分钟 初级</p>
+			<p class="three">66666 人已参加</p>
+		</li>
+		<li>
+			<p class="one">胸肌入门</p>
+			<p class="two">3分钟 初级</p>
+			<p class="three">66666 人已参加</p>
+		</li>
+		<li>
+			<p class="one">胸肌入门</p>
+			<p class="two">3分钟 初级</p>
+			<p class="three">66666 人已参加</p>
+		</li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/lesson.js"></script>
+	<script src="js/template.js"></script>
+	<script type="text/html" id="tplShoping">
+    {{each result}}
+    <li class="clearfix" shopId="{{$value.shopId}}"><a href='javascript:;'>{{$value.shopName}}<span class="fr hide">✔</span></a></li>    
+    {{/each}}
+	</script>
+	<!--区域模板-->
+	<script type="text/html" id="tplArea">
+	    {{each result}}
+	    <li class="clearfix" areaId="{{$value.areaId}}"><a href='javascript:;'>{{$value.areaName}}<span class="fr hide">✔</span></a></li>
+	    {{/each}}
+	</script>
+	<script id="tplProducts" type="text/html">
+   {{each result}}
+      <li class="product">
+          <div class="img">
+              <img src="{{$value.productImg}}">
+          </div>
+          <p class="one">{{$value.productName}}</p>
+          <p class="two">{{$value.productPrice}}</p>
+          <p class="three">
+              66666 人已参加
+          </p>
+      </li>
+   {{/each}}
+  </script>
+  <script>
+  $(".navWrap ul li a").click(function(){
+  	$(this).css("color","#F8E71C").parent("li").siblings('li').children('a').css("color","#9B9B9B");
+  });
+  $(".list2").click(function(){
+	window.location.href="lesson_info.html";
+})
+  </script>
+</body>
+</html>
